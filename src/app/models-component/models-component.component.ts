@@ -20,12 +20,12 @@ export class ModelsComponentComponent implements OnInit {
   years: number[];
   models: IModel[];
 
-  curMake: string = "none";
-  curYear: string = "none";
-  curOffset: number = 0;
+  curMake = 'none';
+  curYear = 'none';
+  curOffset = 0;
 
-  previousDisabled: boolean = true;
-  nextDisabled: boolean = false;
+  previousDisabled = true;
+  nextDisabled = false;
 
   constructor(private http: HttpClient) {
     this.loadMakes();
@@ -42,7 +42,7 @@ export class ModelsComponentComponent implements OnInit {
   }
 
   async showPrevious() {
-    if (this.curOffset > 0){
+    if (this.curOffset > 0) {
       this.curOffset -= 10;
       await this.loadModels();
     }
@@ -66,16 +66,20 @@ export class ModelsComponentComponent implements OnInit {
   }
 
   async loadModels() {
-    if (this.curMake === "none" && this.curYear === "none") {
-      this.models = await this.http.get<IModel[]>(`https://vehicle-data.azurewebsites.net/api/models?offset=${this.curOffset}&fetch=${11}`).toPromise();
-    } else if (this.curMake === "none" && this.curYear !== "none") {
-      this.models = await this.http.get<IModel[]>(`https://vehicle-data.azurewebsites.net/api/models?year=${this.curYear}&offset=${this.curOffset}&fetch=${11}`).toPromise();
-    } else if (this.curMake !== "none" && this.curYear === "none") {
-      this.models = await this.http.get<IModel[]>(`https://vehicle-data.azurewebsites.net/api/models?make=${this.curMake}&offset=${this.curOffset}&fetch=${11}`).toPromise();
+    if (this.curMake === 'none' && this.curYear === 'none') {
+      this.models = await this.http.get<IModel[]>
+        (`https://vehicle-data.azurewebsites.net/api/models?offset=${this.curOffset}&fetch=${11}`).toPromise();
+    } else if (this.curMake === 'none' && this.curYear !== 'none') {
+      this.models = await this.http.get<IModel[]>
+        (`https://vehicle-data.azurewebsites.net/api/models?year=${this.curYear}&offset=${this.curOffset}&fetch=${11}`).toPromise();
+    } else if (this.curMake !== 'none' && this.curYear === 'none') {
+      this.models = await this.http.get<IModel[]>
+        (`https://vehicle-data.azurewebsites.net/api/models?make=${this.curMake}&offset=${this.curOffset}&fetch=${11}`).toPromise();
     } else {
-      this.models = await this.http.get<IModel[]>(`https://vehicle-data.azurewebsites.net/api/models?year=${this.curYear}&make=${this.curMake}&offset=${this.curOffset}&fetch=${11}`).toPromise();
+      this.models = await this.http.get<IModel[]>
+        (`https://vehicle-data.azurewebsites.net/api/models?year=${this.curYear}&make=${this.curMake}&offset=${this.curOffset}&fetch=${11}`).toPromise();
     }
-    if (this.models.length === 11){
+    if (this.models.length === 11) {
       this.nextDisabled = false;
       this.models.pop();
     } else {

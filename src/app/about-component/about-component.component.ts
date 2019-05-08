@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { LoremIpsum } from 'lorem-ipsum'
+import { LoremIpsum } from 'lorem-ipsum';
 
 const lorem = new LoremIpsum({
   sentencesPerParagraph: {
@@ -18,15 +18,13 @@ const lorem = new LoremIpsum({
   styleUrls: ['./about-component.component.css']
 })
 export class AboutComponentComponent implements OnInit {
-  aboutText: string = "";
+  aboutText = '';
 
   constructor() {
     lorem.format = 'html';
     this.aboutText += lorem.generateParagraphs(5);
   }
 
-  ngOnInit() {
-    
-  }
+  ngOnInit() {}
 
 }
